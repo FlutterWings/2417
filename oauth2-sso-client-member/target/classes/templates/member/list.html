@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body class="container">
+<h3>当前登录用户：<span th:text="${#authentication.name}"></span> | <a th:href="@{/logout}">退出</a></h3>
+<h2>这是用户管理列表页面</h2>
+<br/>
+<h1>用户列表</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>username</th>
+            <th>password</th>
+            <th>nickname</th>
+            <th>create_time</th>
+            <th>编辑</th>
+            <th>删除</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="member : ${members}">
+            <th scope="row" th:text="${member.id}"></th>
+            <td th:text="${member.userName}"></td>
+            <td th:text="${member.password}"></td>
+            <td th:text="${member.nickname}"></td>
+            <td th:text="${member.createTime}"></td>
+            <td><a th:href="@{userEdit(id=${member.id})}">编辑</a></td>
+            <td><a th:href="@{delete(id=${member.id})}">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 control-label">
+        <a href="userAdd" th:href="@{userAdd}" class="btn btn-info">添加用户</a>
+    </div>
+</div>
+
+</body>
+</html>
